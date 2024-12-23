@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ./flask_server
+      dockerfile: Dockerfile
+    container_name: flask-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_HOST=sql-server
+      - DATABASE_USER=sa
+      - DATABASE_PASSWORD=YourStrong!Password
+      - DATABASE_NAME=SWE
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./myapp  # Corrected folder name here
+      dockerfile: Dockerfile
+    container_name: react-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql-server
+    ports:
+      - "1433:1433"
+    environment:
+      - SA_PASSWORD=YourStrong!Password
+      - ACCEPT_EULA=Y

@@ -1,0 +1,8 @@
+flask
+flask-cors
+flask-mail
+authlib
+pyodbc
+werkzeug
+requests
+bcrypt

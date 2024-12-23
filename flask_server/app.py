@@ -27,7 +27,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import secrets
 from flask import Flask
-from flask_cors import CORS
+#from flask_cors import CORS
 from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
@@ -77,6 +77,13 @@ app.register_blueprint(payment_bp)
 app.register_blueprint(orderhistory_bp)
 app.register_blueprint(contact_bp)
 
+
+import os
+
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')  # Default to localhost if not set
+DATABASE_USER = os.getenv('DATABASE_USER', 'sa')
+DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', 'YourStrong!Password')
+DATABASE_NAME = os.getenv('DATABASE_NAME', 'SWE')
 
 
 
